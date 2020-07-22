@@ -1,24 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {
+  Switch,
+  Route,
+} from 'react-router-dom';
 
-function App() {
+import { 
+  Base, 
+  Home, 
+  Order, 
+  Toppings,
+  Header
+} from './components';
+
+const App = () => {
+  const [pizza, setPizza] = useState({ base: '', toppings: []});
+
+  const addBase = (base) => {
+    setPizza({...pizza, base})
+  }
+
+  const addTopping = (topping) => {
+    let newToppings;
+
+    if(!pizza.toppings.includes(topping)) {
+      newToppings = [...pizza.toppings, topping];
+    } else {
+      newToppings = pizza.toppings.filter(item => item !== topping);
+    }
+    setPizza(newToppings);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+
+      <Switch>
+        <Route path="/order">
+          <Order />
+        </Route>
+        <Route path="/toppings">
+          <Toppings />
+        </Route>
+        <Route path="/base">
+          <Base />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
