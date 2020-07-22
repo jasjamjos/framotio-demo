@@ -1,12 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const header = () => {
   return (
-    <div>
-      <h1>Framotio-demo</h1>
+    <motion.div
+      className="header"
+      initial={{ y: -250}}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.5, type: 'spring', stiffness: 120}}
+      type
+    >
+      <Link to="/">
+        <h1>Framotio-demo</h1>
+      </Link>
 
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -21,8 +30,8 @@ const header = () => {
             <Link to="/order">Order</Link>
           </li>
         </ul>
-      </nav>
-    </div>
+      </nav> */}
+    </motion.div>
   );
 }
 

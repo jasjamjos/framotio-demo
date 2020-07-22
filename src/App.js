@@ -27,7 +27,7 @@ const App = () => {
     } else {
       newToppings = pizza.toppings.filter(item => item !== topping);
     }
-    setPizza(newToppings);
+    setPizza({...pizza, toppings: newToppings});
   }
 
   return (
@@ -36,13 +36,13 @@ const App = () => {
 
       <Switch>
         <Route path="/order">
-          <Order />
+          <Order pizza={pizza} />
         </Route>
         <Route path="/toppings">
-          <Toppings />
+          <Toppings addTopping={ addTopping } pizza={pizza}/>
         </Route>
         <Route path="/base">
-          <Base />
+          <Base addBase={ addBase } pizza={pizza}/>
         </Route>
         <Route exact path="/">
           <Home />
